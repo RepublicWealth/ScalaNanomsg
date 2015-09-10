@@ -39,7 +39,7 @@ In progress :)
 Example
 ---------
 
-Reading using Futures
+Receiving using Futures
 
 	val socket = new NanoSocket(SocketType.PULL);
 	socket.bind(new TcpAddress("*", 40301));
@@ -49,7 +49,8 @@ Reading using Futures
 	}
 
 
-Reading using Actors
+Receiving using Actors
+
 	val context = ActorSystem.create("parent")
 	val socketRef = context.actorOf(NanoSocketActor.props(SocketType.PULL), "pull-socket");
 	socketRef ! Connect(new TcpAddress("*", 40301))
@@ -60,6 +61,7 @@ Reading using Actors
 	}
 
 Sending using Futures
+
   val socket = new NanoSocket(SocketType.PUSH);
   socket.connect(new TcpAddress("localhost", 40301))
 
@@ -72,7 +74,7 @@ Sending using Actors
 	socketRef ! Connect(new TcpAddress("localhost", 40301))
 
 	socketRef ! StringMessage("String message")
-	
+
 
 Status
 --------
@@ -85,6 +87,11 @@ License
 
 This project is released under the MIT license, as is the native
 libnanomsg library.  See COPYING for more details.
+
+Author
+------
+
+Abhijit Bhole (abhijit@searchx.in)
 
 
 [1]: http://nanomsg.org/                          "nanomsg"

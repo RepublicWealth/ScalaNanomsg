@@ -25,7 +25,7 @@ How to build
 Features
 ---------
 
-1. Fully asynchronous built using Scala Futures
+1. Fully asynchronous using Scala Futures
 
 2. Akka actor based implementation
 

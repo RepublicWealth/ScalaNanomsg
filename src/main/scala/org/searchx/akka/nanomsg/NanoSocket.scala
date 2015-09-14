@@ -64,9 +64,9 @@ class NanoSocket( socketType : SocketType, rawSocket : Boolean = false, debug : 
 	}
 	
 	private var closed = true;
-	def isClosed = closed;
-	private def errno = nn_errno();
-	private def lastError = nn_strerror(errno);
+	def isClosed() = closed;
+	private def errno() = nn_errno();
+	private def lastError() = nn_strerror(errno);
 	
 	private def create( socketType : SocketType, rawSocket : Boolean = false) = Future { if (closed) {
 		val fd = retvalCheck(nn_socket(if (rawSocket) AF_SP_RAW else AF_SP, socketType), "Failed to create socket");
@@ -117,11 +117,6 @@ class NanoSocket( socketType : SocketType, rawSocket : Boolean = false, debug : 
       if (debug) println(s"$debugPrfx: Socket closed");
     }
   }
-
-//	private implicit def messageToAnyRef (message : Message) : AnyRef =  message match {
-//		case m : StringMessage => m.message
-//		case m : BinaryMessage => m.message
-//	}
 
   private def read_(mType : MessageType, dontWait : Boolean) = {
     if (debug) println(s"$debugPrfx: Waiting to receive");
@@ -206,11 +201,6 @@ class NanoSocket( socketType : SocketType, rawSocket : Boolean = false, debug : 
 
   def readZeroCopy(dontWait : Boolean = false) : Future[Message] =
     read(ZEROCOPY, dontWait);
-	
-//	private implicit def toDebugString(message : Message) : String = message match {
-//			case m : BinaryMessage => "Binary message of length " + m.message.length
-//			case m : StringMessage => m.message
-//		}
 
   private def send_(message : Message, dontWait : Boolean) : Int = {
     if (debug) println(debugPrfx + ": Request sending: " + message);

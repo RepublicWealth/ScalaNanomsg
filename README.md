@@ -62,10 +62,10 @@ Receiving using Actors
 
 Sending using Futures
 
-  val socket = new NanoSocket(SocketType.PUSH);
-  socket.connect(new TcpAddress("localhost", 40301))
+	val socket = new NanoSocket(SocketType.PUSH);
+	socket.connect(new TcpAddress("localhost", 40301))
 
-  socket.send(new StringMessage("Test string"))
+	socket.send(new StringMessage("Test string"))
 
 Sending using Actors
 
